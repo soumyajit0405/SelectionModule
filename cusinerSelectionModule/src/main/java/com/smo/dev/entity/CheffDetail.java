@@ -2,6 +2,7 @@ package com.smo.dev.entity;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -94,6 +95,7 @@ public class CheffDetail implements Serializable {
 	@Column(name = "NAME", nullable = false)
 	private File image;
 	
+	private List<String> cusineList;
 	
 	/* 
     locality character varying(40) COLLATE pg_catalog."default" NOT NULL,

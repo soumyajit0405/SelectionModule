@@ -1,6 +1,7 @@
 package com.smo.dev.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,24 @@ public class SmoController {
 		}
 			return new ResponseEntity<List<SmoBaseDto>>(smoBaseDtoList,HttpStatus.NOT_FOUND);
 	}
+	
+	
+	@GetMapping(value="/cheffByCsn")
+	public ResponseEntity<Set<SmoBaseDto>> getAllCheffListByCuisine(@RequestBody SmoBaseDto smoBaseDto ) {
+		Set<SmoBaseDto> smoBaseDtoList = smoService.getCheffListByCuisine(smoBaseDto.getCusineList());
+		if(!smoBaseDtoList.isEmpty()) {
+			return new ResponseEntity<Set<SmoBaseDto>>(smoBaseDtoList,HttpStatus.FOUND);
+		}
+			return new ResponseEntity<Set<SmoBaseDto>>(smoBaseDtoList,HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+
+	
+	
+	
+	
 		
 	
 	

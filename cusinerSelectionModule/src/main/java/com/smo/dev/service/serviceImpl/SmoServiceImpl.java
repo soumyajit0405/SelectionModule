@@ -1,7 +1,10 @@
 package com.smo.dev.service.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,10 +37,27 @@ public class SmoServiceImpl  implements SmoService{
 		
 	}
 
+	/**
+	 * @param : it takes list of cuisine type and based on that It fetch data from DB
+	 * @return : returns List of Cheff profile and based on the cusine type
+	 * 
+	 */
 	@Override
-	public List<SmoBaseDto> getCheffListByCuisine(String cuisineType) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<SmoBaseDto> getCheffListByCuisine(List<String> cuisineList) {
+		Set<SmoBaseDto> smoBaseDtoSet = new LinkedHashSet<>();
+		
+		for(String cusine : cuisineList) {
+			List<CheffDetail> list = smoRepository.getAllCheffByCusineType(cusine);
+			if(!list.isEmpty()) {
+				List<SmoBaseDto> smoBaseDtoList = entityModelMapper
+						.mapEntityListTODtoList(list);
+				for(SmoBaseDto smoBaseDto : smoBaseDtoList) {
+					smoBaseDtoSet.add(smoBaseDto);
+				}
+			}
+			
+		}
+		return smoBaseDtoSet;
 	}
 
 	@Override
