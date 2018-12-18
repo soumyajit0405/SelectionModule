@@ -1,7 +1,6 @@
 package com.smo.dev.service.serviceImpl;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -10,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smo.dev.component.EntityModelMapper;
-import com.smo.dev.entity.CheffDetail;
+import com.smo.dev.entity.ChefDetail;
+import com.smo.dev.model.Location;
 import com.smo.dev.model.SmoBaseDto;
+import com.smo.dev.repository.SmoBookingRepository;
 import com.smo.dev.repository.SmoRepository;
 import com.smo.dev.service.SmoService;
 
@@ -20,6 +21,9 @@ public class SmoServiceImpl  implements SmoService{
 	
 	@Autowired
 	private SmoRepository smoRepository;
+	
+	@Autowired
+	private SmoBookingRepository smoBookingRepository;
 	
 	@Autowired
 	private EntityModelMapper entityModelMapper;
@@ -32,7 +36,7 @@ public class SmoServiceImpl  implements SmoService{
 	@Override
 	public SmoBaseDto getCheffProfile(Long cheffId) {
 		
-		Optional<CheffDetail> optional = smoRepository.findById(cheffId);
+		Optional<ChefDetail> optional = smoRepository.findById(cheffId);
 		return entityModelMapper.mapEntityToDto(optional.get());
 		
 	}
@@ -44,7 +48,7 @@ public class SmoServiceImpl  implements SmoService{
 	 */
 	@Override
 	public Set<SmoBaseDto> getCheffListByCuisine(List<String> cuisineList) {
-		Set<SmoBaseDto> smoBaseDtoSet = new LinkedHashSet<>();
+		/*Set<SmoBaseDto> smoBaseDtoSet = new LinkedHashSet<>();
 		
 		for(String cusine : cuisineList) {
 			List<CheffDetail> list = smoRepository.getAllCheffByCusineType(cusine);
@@ -57,19 +61,26 @@ public class SmoServiceImpl  implements SmoService{
 			}
 			
 		}
-		return smoBaseDtoSet;
+		return smoBaseDtoSet;*/
+		return null;
 	}
 
+	/**To DO ***/
 	@Override
-	public List<SmoBaseDto> getCheffListByLocation(String location) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SmoBaseDto> getCheffListByLocation(Location location,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime) {
+		//location.getLatitude(),location.getLongitude(),
+		//List<Long> chef_idList = smoBookingRepository.findAllChefIdByBookinTime(bookingStartTime, bookingEndTime) ;
+		List<ChefDetail> cheffDetailList = smoRepository.getAllChefByBookingTime(bookingStartTime,bookingEndTime);	
+		
+		return entityModelMapper.mapEntityToCheffInfoDto(cheffDetailList,location.getLongitude(),location.getLatitude());
+		//return null ;
+		
 	}
 
 	@Override
 	public List<SmoBaseDto> getAllCheff() {
 		
-		return entityModelMapper.mapEntityListTODtoList(smoRepository.findAll());
+		return entityModelMapper.mapEntityListToDtoList(smoRepository.findAll());
 	}
 
 	@Override

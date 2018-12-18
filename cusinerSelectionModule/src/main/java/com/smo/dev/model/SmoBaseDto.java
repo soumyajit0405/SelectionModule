@@ -1,18 +1,19 @@
 package com.smo.dev.model;
 
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class SmoBaseDto {
 
-	private int cheffId;
+	private long chefId;
+	private String panNum;
+	private long aadhaarNum;
 	private String fullName;
 	private long primPhoneNum;
 	private long altPhoneNum;
-	private long adhaarNum;
-	private String panNum;
 	private String addressLineOne;
 	private String addressLineTwo;
-	private String religion;
 	private String city;
 	private long postalCode;
 	private long areaCode;
@@ -20,17 +21,38 @@ public class SmoBaseDto {
 	private int maxTravelDistance;
 	private Double perKmTravelCost;
 	private String zone;
-	private Double longitutde;
-	private Double latitutde;
+	private Location location;
+	private char chefCategory;
 	private List<String> cusineList;
-	
+	private LocalDateTime bookingStartTime;
+	private LocalDateTime bookingEndTime;
+	private File chefImage;
 	public SmoBaseDto() {}
 	
-	public int getCheffId() {
-		return cheffId;
+	
+	public Location getLocation() {
+		return location;
 	}
-	public void setCheffId(int cheffId) {
-		this.cheffId = cheffId;
+
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+
+	public File getChefImage() {
+		return chefImage;
+	}
+
+	public void setChefImage(File chefImage) {
+		this.chefImage = chefImage;
+	}
+
+	public long getChefId() {
+		return chefId;
+	}
+	public void setChefId(long chefId) {
+		this.chefId = chefId;
 	}
 	public String getFullName() {
 		return fullName;
@@ -50,18 +72,6 @@ public class SmoBaseDto {
 	public void setAltPhoneNum(long altPhoneNum) {
 		this.altPhoneNum = altPhoneNum;
 	}
-	public long getAdhaarNum() {
-		return adhaarNum;
-	}
-	public void setAdhaarNum(long adhaarNum) {
-		this.adhaarNum = adhaarNum;
-	}
-	public String getPanNum() {
-		return panNum;
-	}
-	public void setPanNum(String panNum) {
-		this.panNum = panNum;
-	}
 	public String getAddressLineOne() {
 		return addressLineOne;
 	}
@@ -74,12 +84,7 @@ public class SmoBaseDto {
 	public void setAddressLineTwo(String addressLineTwo) {
 		this.addressLineTwo = addressLineTwo;
 	}
-	public String getReligion() {
-		return religion;
-	}
-	public void setReligion(String religion) {
-		this.religion = religion;
-	}
+	
 	public String getCity() {
 		return city;
 	}
@@ -122,17 +127,29 @@ public class SmoBaseDto {
 	public void setZone(String zone) {
 		this.zone = zone;
 	}
-	public Double getLongitutde() {
-		return longitutde;
+	
+	public String getPanNum() {
+		return panNum;
 	}
-	public void setLongitutde(Double longitutde) {
-		this.longitutde = longitutde;
+
+	public void setPanNum(String panNum) {
+		this.panNum = panNum;
 	}
-	public Double getLatitutde() {
-		return latitutde;
+
+	public long getAadhaarNum() {
+		return aadhaarNum;
 	}
-	public void setLatitutde(Double latitutde) {
-		this.latitutde = latitutde;
+
+	public void setAadhaarNum(long aadhaarNum) {
+		this.aadhaarNum = aadhaarNum;
+	}
+
+	public char getChefCategory() {
+		return chefCategory;
+	}
+
+	public void setChefCategory(char chefCategory) {
+		this.chefCategory = chefCategory;
 	}
 
 	public List<String> getCusineList() {
@@ -141,6 +158,22 @@ public class SmoBaseDto {
 
 	public void setCusineList(List<String> cusineList) {
 		this.cusineList = cusineList;
+	}
+
+	public LocalDateTime getBookingStartTime() {
+		return bookingStartTime;
+	}
+
+	public void setBookingStartTime(LocalDateTime bookingStartTime) {
+		this.bookingStartTime = bookingStartTime;
+	}
+
+	public LocalDateTime getBookingEndTime() {
+		return bookingEndTime;
+	}
+
+	public void setBookingEndTime(LocalDateTime bookingEndTime) {
+		this.bookingEndTime = bookingEndTime;
 	}
 	
 	
