@@ -52,9 +52,17 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 	@Column(name = "full_name")
 	private boolean isAvailable;
 	
+	@NotEmpty
+	@Column(name = "latitude")
+	private Double latitude;
+	
+	@NotEmpty
+	@Column(name = "longitude")
+	private Double longitude;
+	
 	private List<String> bestPreparations;
 	
-	@OneToMany(mappedBy="chefDetail")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="chefDetail", fetch = FetchType.LAZY)
 	private List<ChefDishMapping> chefDishMappings;
 
 	public File getImage() {
@@ -132,7 +140,21 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public Double getLatitude() {
+		return latitude;
+	}
 
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -141,6 +163,8 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 		result = prime * result + ((chefCategory == null) ? 0 : chefCategory.hashCode());
 		result = prime * result + ((chefType == null) ? 0 : chefType.hashCode());
 		result = prime * result + ((cheffFullName == null) ? 0 : cheffFullName.hashCode());
+		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + (isAvailable ? 1231 : 1237);
@@ -200,7 +224,18 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 				return false;
 		} else if (!specialization.equals(other.specialization))
 			return false;
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!latitude.equals(other.latitude))
+			return false;
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!longitude.equals(other.longitude))
+			return false;
 		return true;
+		
 	}
     
 	

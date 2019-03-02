@@ -1,7 +1,6 @@
-package com.smo.dev.entity;
+package com.smo.dev.model;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "all_dishes")
-public class AllDishes implements Serializable {
+public class AllDishes {
 /*dishId
 dishName;
 description
@@ -25,37 +24,22 @@ dishVideo;
 cuisineId
 type
 String type;*/
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "dish_id",nullable = false)
+	
 	private int dishId;
-	@NotEmpty
-	@Column(name = "dish_name")
+	
 	private String dishName;
-	@NotEmpty
-	@Column(name = "description")
+	
 	private String description;
-	@NotEmpty
-	@Column(name = "dish_image")
+	
 	private File dishImage;
-	@NotEmpty
-	@Column(name = "dish_video")
+	
 	private byte[] dishVideo;
 	
-	@NotEmpty
-	@Column(name = "cuisine_id")
 	private int cuisineId;
-	@NotEmpty
-	@Column(name = "type")
+	
 	private String type;
 	//@manyToMany
-	//private ChefDetail chefDetail; 
-	
-	@OneToMany(mappedBy = "allDishes")
-	private List<ChefDishMapping> chefDishMapping;
-	
-	@OneToMany(mappedBy="allDishes")
-	private List<DishIngredientMaapping> dishIngredientMaapping;
+	//private ChefDetail chefDetail;
 	
 	public int getDishId() {
 		return dishId;

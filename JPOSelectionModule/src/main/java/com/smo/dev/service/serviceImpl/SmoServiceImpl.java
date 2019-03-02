@@ -88,20 +88,27 @@ public class SmoServiceImpl  implements SmoService{
 
 	/**To DO ***/
 	@Override
-	public List<CheffInfoDto> getCheffListByLocation
+	public List<CheffInfoDto> findAvailableChefService
 	(Location userLocation,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime) {
 		
-		List<ChefDetail> cheffDetailList = smoRepository.getAllChefByBookingTime(bookingStartTime,bookingEndTime);	
-		List<CheffInfoDto> chefInfoList = entityModelMapper.mapEntityToCheffInfoDto(cheffDetailList);
 		List<CheffInfoDto> chefInfoResultList = new ArrayList<>();
-		/*for(CheffInfoDto CheffInfoDto : chefInfoList) {
+		try {
+			List<ChefDetail>	cheffDetailList = smoRepository.getAllChefByBookingTime(bookingStartTime,bookingEndTime);	
+		List<CheffInfoDto> chefInfoList = entityModelMapper.mapEntityToCheffInfoDto(cheffDetailList);
+		
+		
+		
+		for(CheffInfoDto CheffInfoDto : chefInfoList) {
 			Location chefLocation = CheffInfoDto.getLocation();
 			double distance = DistanceCalculator.distanceFinder (userLocation,chefLocation,"Y");
 			if(distance <= 4) {
-				CheffInfoDto.setDistanceFromCustomer(distance);
+				//CheffInfoDto.setDistanceFromCustomer(distance);
 				chefInfoResultList.add(CheffInfoDto);
 			}
-		}*/
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return chefInfoResultList ;
 		

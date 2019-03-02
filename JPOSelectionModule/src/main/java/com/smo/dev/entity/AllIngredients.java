@@ -1,5 +1,6 @@
 package com.smo.dev.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "all_ingredients")
-public class AllIngredients {
+public class AllIngredients implements Serializable  {
 	/*ingredientId
 	ingredientName
 	description

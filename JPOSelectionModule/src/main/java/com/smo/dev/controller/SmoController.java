@@ -57,7 +57,7 @@ public class SmoController {
 	public ResponseEntity<List<CheffInfoDto>> getAllAvailableCheffList(SmoBaseDto smoBaseDto) {
 		Location location = smoBaseDto.getLocation();
 		//calling services
-		List<CheffInfoDto> smoDtoList = smoService.getCheffListByLocation(location,
+		List<CheffInfoDto> smoDtoList = smoService.findAvailableChefService(location,
 				smoBaseDto.getBookingStartTime(),smoBaseDto.getBookingEndTime());
 		
 		if(!smoDtoList.isEmpty()) {

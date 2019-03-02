@@ -15,7 +15,7 @@ import com.smo.dev.model.SmoBaseDto;
 public interface SmoService {
 	CheffInfoDto getCheffProfile(int cheffId);
 	Set<SmoBaseDto> getCheffListByCuisine(List<String> cuisineList);
-	List<CheffInfoDto> getCheffListByLocation(Location location,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime);
+	List<CheffInfoDto> findAvailableChefService(Location location,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime);
 	List<SmoBaseDto> getAllCheff();
 	List<SmoBaseDto> getAvailabeCheffByLocation(String Location,Boolean availabe);
 	List<SmoBaseDto> getAvailabeCheffByCuisine (String cuisineType,Boolean available);

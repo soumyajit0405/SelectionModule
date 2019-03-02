@@ -70,15 +70,7 @@ public class ChefExtraDetail  implements Serializable{
 	@NotEmpty
 	@Column(name = "travel_charge_per_km")
 	private Double perKmTravelCost;
-	
-	@NotEmpty
-	@Column(name = "latitude")
-	private Double latitude;
-	
-	@NotEmpty
-	@Column(name = "longitude")
-	private Double longitude;
-	
+
 	public ChefExtraDetail() {}
 
 	public long getChefId() {
@@ -201,21 +193,7 @@ public class ChefExtraDetail  implements Serializable{
 		this.perKmTravelCost = perKmTravelCost;
 	}
 
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -227,8 +205,6 @@ public class ChefExtraDetail  implements Serializable{
 		result = prime * result + ((altPhoneNum == null) ? 0 : altPhoneNum.hashCode());
 		result = prime * result + (int) (chefId ^ (chefId >>> 32));
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
-		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
 		result = prime * result + ((maxTravelDistance == null) ? 0 : maxTravelDistance.hashCode());
 		result = prime * result + ((panNum == null) ? 0 : panNum.hashCode());
 		result = prime * result + ((perKmTravelCost == null) ? 0 : perKmTravelCost.hashCode());
@@ -276,16 +252,6 @@ public class ChefExtraDetail  implements Serializable{
 			if (other.city != null)
 				return false;
 		} else if (!city.equals(other.city))
-			return false;
-		if (latitude == null) {
-			if (other.latitude != null)
-				return false;
-		} else if (!latitude.equals(other.latitude))
-			return false;
-		if (longitude == null) {
-			if (other.longitude != null)
-				return false;
-		} else if (!longitude.equals(other.longitude))
 			return false;
 		if (maxTravelDistance == null) {
 			if (other.maxTravelDistance != null)

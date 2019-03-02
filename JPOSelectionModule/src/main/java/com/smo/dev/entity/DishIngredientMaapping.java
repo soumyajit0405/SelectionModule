@@ -1,5 +1,6 @@
 package com.smo.dev.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="dish_ingredient_mapping")
-public class DishIngredientMaapping {
+public class DishIngredientMaapping implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ingredient_mapping_id",nullable = false)

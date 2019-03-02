@@ -44,14 +44,20 @@ public class EntityModelMapper {
 		}
 		return smoBaseDtoList;
 	}
-	public List<CheffInfoDto> mapEntityToCheffInfoDto(List<ChefDetail> cheffDetailList ) {
+	public List<CheffInfoDto> mapEntityToCheffInfoDto(List<ChefDetail> cheffDetailList ) throws Exception{
 		List<CheffInfoDto> cheffInfoList = new ArrayList <>();
+		if(!cheffDetailList.isEmpty() && cheffDetailList!=null) {
 		for(ChefDetail chefDetail : cheffDetailList) {
 			cheffInfoList.add(modelMapper.map(chefDetail, CheffInfoDto.class));
+		}
 		}
 		return cheffInfoList;
 	}
 	
+	
+	public void prepareChefProfile(ChefDetail chefDetail) {
+		
+	}
 	
 	@Bean
 	public ModelMapper gerModelMapper() {

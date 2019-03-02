@@ -2,6 +2,7 @@ package com.smo.dev.model;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public class CheffInfoDto {
 	
@@ -16,10 +17,43 @@ public class CheffInfoDto {
 	private int bookingCost;
 	private String chefCategory;
 	private int averageRating;
+	private Double latitude;
+	private Double longitude;
 	//private List<RatingAndReview> ratingAndReviewList;
-	
+	private Map<String,String> cusineMap;
 	public CheffInfoDto () {}
 	
+	
+	public Map<String, String> getCusineMap() {
+		return cusineMap;
+	}
+
+
+	public void setCusineMap(Map<String, String> cusineMap) {
+		this.cusineMap = cusineMap;
+	}
+
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+
 	public long getChefId() {
 		return chefId;
 	}

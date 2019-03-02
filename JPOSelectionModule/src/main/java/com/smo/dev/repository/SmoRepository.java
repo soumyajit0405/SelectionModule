@@ -26,7 +26,7 @@ public interface SmoRepository  extends JpaRepository<ChefDetail, Integer>{
 
 	//@Query("select cd from ChefDetail cd where cd.chefId = (select bk.chefDetail.chefId from cd.ChefBookingDetail bk where bk.startTime NOT BETWEEN :bookingStartTime AND :bookingEndTime)")
 	//@Query("select u.userName from User u inner join u.area ar where ar.idArea = :idArea")
-	@Query("select cd from ChefExtraDetail cd left join cd.chefBookingDetail cbkd where cbkd.startTime NOT BETWEEN :bookingStartTime AND :bookingEndTime")
+	@Query("select cd from ChefDetail cd left join cd.chefBookingDetail cbkd where cbkd.startTime NOT BETWEEN :bookingStartTime AND :bookingEndTime")
     List<ChefDetail> getAllChefByBookingTime(LocalDateTime bookingStartTime, LocalDateTime bookingEndTime);
 
 	

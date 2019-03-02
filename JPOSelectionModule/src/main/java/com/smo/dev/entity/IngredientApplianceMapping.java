@@ -1,4 +1,6 @@
-package com.smo.dev.entity;
+ package com.smo.dev.entity;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="ingredient_appliance_mappings")
-public class IngredientApplianceMapping {
+public class IngredientApplianceMapping implements Serializable  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
