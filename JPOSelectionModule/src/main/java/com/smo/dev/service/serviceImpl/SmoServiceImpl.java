@@ -6,12 +6,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smo.dev.component.DistanceCalculator;
 import com.smo.dev.component.EntityModelMapper;
 import com.smo.dev.entity.ChefDetail;
+import com.smo.dev.entity.ChefExtraDetail;
 import com.smo.dev.model.CheffInfoDto;
 import com.smo.dev.model.Location;
 import com.smo.dev.model.SmoBaseDto;
@@ -35,17 +39,27 @@ public class SmoServiceImpl  implements SmoService{
 	@Autowired
 	private EntityModelMapper entityModelMapper;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	/**
 	 * @param : it takes a cheff id as a parameter to fetch data agaist db
 	 * @return : returns CheffDetail enity need to convert into SmoBaseDto and 
 	 * return back to controller
 	 */
 	@Override
-	public SmoBaseDto getCheffProfile(Long cheffId) {
-		
-		Optional<ChefDetail> optional = smoRepository.findById(cheffId);
-		return entityModelMapper.mapEntityToDto(optional.get());
-		
+	@Transactional
+	public CheffInfoDto getCheffProfile(int cheffId) {
+		CheffInfoDto cheffInfoDto = new CheffInfoDto();
+		try {
+			ChefDetail chefDetail = smoRepository.getOne(cheffId);
+		if(chefDetail!=null) {
+			return modelMapper.map(chefDetail,CheffInfoDto.class);
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return cheffInfoDto;
 	}
 
 	/**
@@ -74,18 +88,20 @@ public class SmoServiceImpl  implements SmoService{
 
 	/**To DO ***/
 	@Override
-	public List<CheffInfoDto> getCheffListByLocation(Location userLocation,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime) {
+	public List<CheffInfoDto> getCheffListByLocation
+	(Location userLocation,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime) {
+		
 		List<ChefDetail> cheffDetailList = smoRepository.getAllChefByBookingTime(bookingStartTime,bookingEndTime);	
 		List<CheffInfoDto> chefInfoList = entityModelMapper.mapEntityToCheffInfoDto(cheffDetailList);
 		List<CheffInfoDto> chefInfoResultList = new ArrayList<>();
-		for(CheffInfoDto CheffInfoDto : chefInfoList) {
+		/*for(CheffInfoDto CheffInfoDto : chefInfoList) {
 			Location chefLocation = CheffInfoDto.getLocation();
 			double distance = DistanceCalculator.distanceFinder (userLocation,chefLocation,"Y");
 			if(distance <= 4) {
 				CheffInfoDto.setDistanceFromCustomer(distance);
 				chefInfoResultList.add(CheffInfoDto);
 			}
-		}
+		}*/
 		
 		return chefInfoResultList ;
 		

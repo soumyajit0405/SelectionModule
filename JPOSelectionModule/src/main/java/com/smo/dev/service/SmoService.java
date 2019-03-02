@@ -13,7 +13,7 @@ import com.smo.dev.model.SmoBaseDto;
  *
  */
 public interface SmoService {
-	SmoBaseDto getCheffProfile(Long cheffId);
+	CheffInfoDto getCheffProfile(int cheffId);
 	Set<SmoBaseDto> getCheffListByCuisine(List<String> cuisineList);
 	List<CheffInfoDto> getCheffListByLocation(Location location,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime);
 	List<SmoBaseDto> getAllCheff();

@@ -1,6 +1,5 @@
 package com.smo.dev.controller;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
@@ -40,12 +39,12 @@ public class SmoController {
 	 * @response : chef profile  
 	 */
 	@GetMapping(value="/profile/{chefId}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SmoBaseDto> getCheffProfile(@PathVariable long chefId) {
-		SmoBaseDto smoBaseDto = smoService.getCheffProfile(chefId);
-		if(smoBaseDto!= null) {
-			return new ResponseEntity<SmoBaseDto>(smoBaseDto,HttpStatus.FOUND);
+	public ResponseEntity<CheffInfoDto> getCheffProfile(@PathVariable int chefId) {
+		CheffInfoDto cheffInfoDto = smoService.getCheffProfile(chefId);
+		if(cheffInfoDto!= null) {
+			return new ResponseEntity<CheffInfoDto>(cheffInfoDto,HttpStatus.FOUND);
 		}
-			return new ResponseEntity<SmoBaseDto>(smoBaseDto,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<CheffInfoDto>(cheffInfoDto,HttpStatus.NOT_FOUND);
 	}
 	
 	/**
@@ -55,14 +54,12 @@ public class SmoController {
 	 *         availablity of the chef
 	 */
 	@PostMapping(value="/allProfile",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<CheffInfoDto>> getAllCheffList(SmoBaseDto smoBaseDto) {
+	public ResponseEntity<List<CheffInfoDto>> getAllAvailableCheffList(SmoBaseDto smoBaseDto) {
 		Location location = smoBaseDto.getLocation();
-		//LocalDateTime bookingStartTime,@RequestParam LocalDateTime bookingEndTime) 
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
-		//LocalDateTime startDateTime = LocalDateTime.parse(smoBaseDto.getBookingStartTime(), formatter);
-		
+		//calling services
 		List<CheffInfoDto> smoDtoList = smoService.getCheffListByLocation(location,
 				smoBaseDto.getBookingStartTime(),smoBaseDto.getBookingEndTime());
+		
 		if(!smoDtoList.isEmpty()) {
 			return new ResponseEntity<List<CheffInfoDto>>(smoDtoList,HttpStatus.FOUND);
 		}
@@ -79,5 +76,7 @@ public class SmoController {
 			return new ResponseEntity<Set<SmoBaseDto>>(smoBaseDtoList,HttpStatus.NOT_FOUND);
 	}
 	
-	
+	//LocalDateTime bookingStartTime,@RequestParam LocalDateTime bookingEndTime) 
+			//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
+			//LocalDateTime startDateTime = LocalDateTime.parse(smoBaseDto.getBookingStartTime(), formatter);
 }

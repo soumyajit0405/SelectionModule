@@ -4,38 +4,39 @@ import java.io.File;
 import java.util.List;
 
 public class CheffInfoDto {
-	private long chef_id;
-	private String cheff_name;
-	private long phoneNumber;
+	
+	private long chefId;
+	private String cheffFullName;
+	//private long phoneNumber;
+	private String description;
 	private List<Cusine> cusineList;
 	private Location location;
+	private List<String> bestPreparations;
 	private File imageFile;
-	private int basicTerrif;
+	private int bookingCost;
+	private String chefCategory;
 	private int averageRating;
-	private double distanceFromCustomer;
-	private RatingAndReview ratingAndReview;
+	//private List<RatingAndReview> ratingAndReviewList;
 	
-	public long getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public CheffInfoDto() {}
+	public CheffInfoDto () {}
 	
-	public long getChef_id() {
-		return chef_id;
+	public long getChefId() {
+		return chefId;
 	}
-	public void setChef_id(long chef_id) {
-		this.chef_id = chef_id;
+	public void setChefId(long chefId) {
+		this.chefId = chefId;
 	}
-	public String getCheff_name() {
-		return cheff_name;
+	public String getCheffFullName() {
+		return cheffFullName;
 	}
-	public void setCheff_name(String cheff_name) {
-		this.cheff_name = cheff_name;
+	public void setCheffFullName(String cheffFullName) {
+		this.cheffFullName = cheffFullName;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public List<Cusine> getCusineList() {
 		return cusineList;
@@ -49,43 +50,36 @@ public class CheffInfoDto {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+	public List<String> getBestPreparations() {
+		return bestPreparations;
+	}
+	public void setBestPreparations(List<String> bestPreparations) {
+		this.bestPreparations = bestPreparations;
+	}
 	public File getImageFile() {
 		return imageFile;
 	}
 	public void setImageFile(File imageFile) {
 		this.imageFile = imageFile;
 	}
-	public RatingAndReview getRatingAndReview() {
-		return ratingAndReview;
+	public int getBookingCost() {
+		return bookingCost;
 	}
-	public void setRatingAndReview(RatingAndReview ratingAndReview) {
-		this.ratingAndReview = ratingAndReview;
+	public void setBookingCost(int bookingCost) {
+		this.bookingCost = bookingCost;
 	}
-
-	public int getBasicTerrif() {
-		return basicTerrif;
+	public String getChefCategory() {
+		return chefCategory;
 	}
-
-	public void setBasicTerrif(int basicTerrif) {
-		this.basicTerrif = basicTerrif;
+	public void setChefCategory(String chefCategory) {
+		this.chefCategory = chefCategory;
 	}
-
 	public int getAverageRating() {
 		return averageRating;
 	}
-
 	public void setAverageRating(int averageRating) {
 		this.averageRating = averageRating;
 	}
-
-	public double getDistanceFromCustomer() {
-		return distanceFromCustomer;
-	}
-
-	public void setDistanceFromCustomer(double distanceFromCustomer) {
-		this.distanceFromCustomer = distanceFromCustomer;
-	}
-	
 	
 	
 }

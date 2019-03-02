@@ -11,13 +11,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.smo.dev.entity.ChefDetail;
+import com.smo.dev.entity.ChefExtraDetail;
 /**
  * 
  * @author Ehtu
  *
  */
 @Repository
-public interface SmoRepository  extends JpaRepository<ChefDetail, Long>{
+public interface SmoRepository  extends JpaRepository<ChefDetail, Integer>{
 	
 	//List<CheffDetail> getAllCheffByCusineType(String cusine);
 	/*public final static String FIND_BY_BOOKING_TIME = "SELECT FROM ChefDetail " +
@@ -25,7 +26,7 @@ public interface SmoRepository  extends JpaRepository<ChefDetail, Long>{
 
 	//@Query("select cd from ChefDetail cd where cd.chefId = (select bk.chefDetail.chefId from cd.ChefBookingDetail bk where bk.startTime NOT BETWEEN :bookingStartTime AND :bookingEndTime)")
 	//@Query("select u.userName from User u inner join u.area ar where ar.idArea = :idArea")
-	@Query("select cd from ChefDetail cd left join cd.chefBookingDetail cbkd where cbkd.startTime NOT BETWEEN :bookingStartTime AND :bookingEndTime")
+	@Query("select cd from ChefExtraDetail cd left join cd.chefBookingDetail cbkd where cbkd.startTime NOT BETWEEN :bookingStartTime AND :bookingEndTime")
     List<ChefDetail> getAllChefByBookingTime(LocalDateTime bookingStartTime, LocalDateTime bookingEndTime);
 
 	
