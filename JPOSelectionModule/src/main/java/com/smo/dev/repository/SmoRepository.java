@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.smo.dev.entity.ChefDetail;
-import com.smo.dev.entity.ChefExtraDetail;
+import com.smo.dev.repository.entity.ChefDetail;
+import com.smo.dev.repository.entity.ChefExtraDetail;
 /**
  * 
  * @author Ehtu

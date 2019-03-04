@@ -14,19 +14,19 @@ import org.springframework.stereotype.Service;
 
 import com.smo.dev.component.DistanceCalculator;
 import com.smo.dev.component.EntityModelMapper;
-import com.smo.dev.entity.ChefDetail;
-import com.smo.dev.entity.ChefExtraDetail;
 import com.smo.dev.model.CheffInfoDto;
 import com.smo.dev.model.Location;
 import com.smo.dev.model.SmoBaseDto;
 import com.smo.dev.repository.SmoBookingRepository;
 import com.smo.dev.repository.SmoRepository;
+import com.smo.dev.repository.entity.ChefDetail;
+import com.smo.dev.repository.entity.ChefExtraDetail;
 import com.smo.dev.service.SmoService;
 /**
  * 
  * @author Ehtu
  *
- */
+ */ 
 @Service
 public class SmoServiceImpl  implements SmoService{
 	

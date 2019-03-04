@@ -1,4 +1,4 @@
-package com.smo.dev.entity;
+package com.smo.dev.repository.entity;
 
 import java.io.File;
 import java.io.Serializable;
@@ -32,7 +32,7 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 	@Column(name = "full_name")
 	private String cheffFullName;
 	
-	@Column(name = "full_name")
+	@Column(name = "chef_type")
 	private String chefType;
 	
 	@NotEmpty
@@ -43,13 +43,13 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 	@Column(name = "qualification")
 	private String qualification;
 		
-	@Column(name = "full_name")
+	@Column(name = "specialization")
 	private String specialization;
 	
-	@Column(name = "full_name")
+	@Column(name = "comments")
 	private String comments;
 
-	@Column(name = "full_name")
+	@Column(name = "isAvailable")
 	private boolean isAvailable;
 	
 	@NotEmpty
@@ -60,7 +60,9 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 	@Column(name = "longitude")
 	private Double longitude;
 	
-	private List<String> bestPreparations;
+	//private List<String> bestPreparations;
+	@OneToMany(mappedBy="chefDetail",fetch = FetchType.LAZY)
+	private List<ChefBookingDetail> chefBookingDetail;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="chefDetail", fetch = FetchType.LAZY)
 	private List<ChefDishMapping> chefDishMappings;
@@ -129,13 +131,13 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 		this.isAvailable = isAvailable;
 	}
 
-	public List<String> getBestPreparations() {
+	/*public List<String> getBestPreparations() {
 		return bestPreparations;
 	}
 
 	public void setBestPreparations(List<String> bestPreparations) {
 		this.bestPreparations = bestPreparations;
-	}
+	}*/
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -159,7 +161,7 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((bestPreparations == null) ? 0 : bestPreparations.hashCode());
+		//result = prime * result + ((bestPreparations == null) ? 0 : bestPreparations.hashCode());
 		result = prime * result + ((chefCategory == null) ? 0 : chefCategory.hashCode());
 		result = prime * result + ((chefType == null) ? 0 : chefType.hashCode());
 		result = prime * result + ((cheffFullName == null) ? 0 : cheffFullName.hashCode());
@@ -182,11 +184,11 @@ public class ChefDetail extends ChefExtraDetail implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ChefDetail other = (ChefDetail) obj;
-		if (bestPreparations == null) {
+	/*	if (bestPreparations == null) {
 			if (other.bestPreparations != null)
 				return false;
 		} else if (!bestPreparations.equals(other.bestPreparations))
-			return false;
+			return false;*/
 		if (chefCategory == null) {
 			if (other.chefCategory != null)
 				return false;

@@ -1,10 +1,11 @@
-package com.smo.dev.entity;
+package com.smo.dev.repository.entity;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class AllIngredients implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ingredient_id",nullable = false)
-	private int ingredient_id;
+	private long ingredient_id;
 	@NotEmpty
 	@Column(name = "ingredient_name")
 	private String ingredientName;
@@ -51,19 +52,19 @@ public class AllIngredients implements Serializable  {
 	@Column(name = "needs_non_stick_cookware_flag")
 	private boolean needsNonStickCookwareFlag;
 	
-	@OneToMany(mappedBy="allIngredients")
+	@OneToMany(mappedBy="allIngredients",fetch=FetchType.LAZY)
 	private List<DishIngredientMaapping> dishIngredientMaapping;
-	
-	@OneToMany(mappedBy="allIngredients")
-	private List<IngredientApplianceMapping> ingreAppMappingList;
+	/*
+	@OneToMany(mappedBy="allIngredients",fetch=FetchType.LAZY)
+	private List<IngredientApplianceMapping> ingredientApplianceMapping;
 	//manytomany alldishes
-	
+*/	
 	public AllIngredients() {}
 	
-	public int getIngredient_id() {
+	public long getIngredient_id() {
 		return ingredient_id;
 	}
-	public void setIngredient_id(int ingredient_id) {
+	public void setIngredient_id(long ingredient_id) {
 		this.ingredient_id = ingredient_id;
 	}
 	public String getIngredientName() {
@@ -124,14 +125,6 @@ public class AllIngredients implements Serializable  {
 		this.dishIngredientMaapping = dishIngredientMaapping;
 	}
 
-	public List<IngredientApplianceMapping> getIngreAppMappingList() {
-		return ingreAppMappingList;
-	}
-
-	public void setIngreAppMappingList(List<IngredientApplianceMapping> ingreAppMappingList) {
-		this.ingreAppMappingList = ingreAppMappingList;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,9 +132,8 @@ public class AllIngredients implements Serializable  {
 		result = prime * result + averageCostPerUnit;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((dishIngredientMaapping == null) ? 0 : dishIngredientMaapping.hashCode());
-		result = prime * result + ((ingreAppMappingList == null) ? 0 : ingreAppMappingList.hashCode());
 		result = prime * result + ((ingredientName == null) ? 0 : ingredientName.hashCode());
-		result = prime * result + ingredient_id;
+		result = prime * result + (int) (ingredient_id ^ (ingredient_id >>> 32));
 		result = prime * result + (needsMicrowaveFlag ? 1231 : 1237);
 		result = prime * result + (needsNonStickCookwareFlag ? 1231 : 1237);
 		result = prime * result + (needsRefrigeratorFlag ? 1231 : 1237);
@@ -171,11 +163,6 @@ public class AllIngredients implements Serializable  {
 				return false;
 		} else if (!dishIngredientMaapping.equals(other.dishIngredientMaapping))
 			return false;
-		if (ingreAppMappingList == null) {
-			if (other.ingreAppMappingList != null)
-				return false;
-		} else if (!ingreAppMappingList.equals(other.ingreAppMappingList))
-			return false;
 		if (ingredientName == null) {
 			if (other.ingredientName != null)
 				return false;
@@ -198,7 +185,15 @@ public class AllIngredients implements Serializable  {
 			return false;
 		return true;
 	}
-	
+
+	/*
+	public List<IngredientApplianceMapping> getIngredientApplianceMapping() {
+		return ingredientApplianceMapping;
+	}
+
+	public void setIngredientApplianceMapping(List<IngredientApplianceMapping> ingredientApplianceMapping) {
+		this.ingredientApplianceMapping = ingredientApplianceMapping;
+	}*/
 	
 	
 }

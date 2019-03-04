@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import com.smo.dev.entity.ChefDetail;
 import com.smo.dev.model.CheffInfoDto;
 import com.smo.dev.model.Location;
 import com.smo.dev.model.RatingAndReview;
 import com.smo.dev.model.SmoBaseDto;
+import com.smo.dev.repository.entity.ChefDetail;
 /**
  * 
  * @author Ehtu

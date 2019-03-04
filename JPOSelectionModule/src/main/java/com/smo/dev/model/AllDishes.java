@@ -13,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name = "all_dishes")
 public class AllDishes {
 /*dishId
 dishName;

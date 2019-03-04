@@ -1,4 +1,4 @@
-package com.smo.dev.entity;
+package com.smo.dev.repository.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,15 +21,15 @@ public class SpecialAppliances implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "key",nullable = false)
-	private int key;
+	private long key;
 
 	@NotEmpty
 	@Column(name = "appliance_name")
 	private String applianceName;
 	
-	@OneToMany(mappedBy="specialAppliances")
+	/*@OneToMany(mappedBy="specialAppliances")
 	private List<IngredientApplianceMapping> ingreAppMapList;
-
+*/
 	public SpecialAppliances() {}
 	
 	public int getKey() {
@@ -47,7 +47,7 @@ public class SpecialAppliances implements Serializable {
 	public void setApplianceName(String applianceName) {
 		this.applianceName = applianceName;
 	}
-
+/*
 	public List<IngredientApplianceMapping> getIngreAppMapList() {
 		return ingreAppMapList;
 	}
@@ -56,12 +56,12 @@ public class SpecialAppliances implements Serializable {
 		this.ingreAppMapList = ingreAppMapList;
 	}
 
-	@Override
+*/	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((applianceName == null) ? 0 : applianceName.hashCode());
-		result = prime * result + ((ingreAppMapList == null) ? 0 : ingreAppMapList.hashCode());
+//		result = prime * result + ((ingreAppMapList == null) ? 0 : ingreAppMapList.hashCode());
 		result = prime * result + key;
 		return result;
 	}
@@ -80,11 +80,11 @@ public class SpecialAppliances implements Serializable {
 				return false;
 		} else if (!applianceName.equals(other.applianceName))
 			return false;
-		if (ingreAppMapList == null) {
+	/*	if (ingreAppMapList == null) {
 			if (other.ingreAppMapList != null)
 				return false;
 		} else if (!ingreAppMapList.equals(other.ingreAppMapList))
-			return false;
+			return false;*/
 		if (key != other.key)
 			return false;
 		return true;

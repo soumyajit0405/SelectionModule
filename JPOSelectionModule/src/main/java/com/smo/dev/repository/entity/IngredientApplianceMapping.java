@@ -1,4 +1,4 @@
- package com.smo.dev.entity;
+ package com.smo.dev.repository.entity;
 
 import java.io.Serializable;
 
@@ -11,11 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name ="ingredient_appliance_mappings")
+/*@Entity
+@Table(name ="ingredient_appliance_mappings")*/
 public class IngredientApplianceMapping implements Serializable  {
 
-	@Id
+	/*@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "app_mapping_id",nullable = false)
 	private int appMappingId;
@@ -27,7 +27,9 @@ public class IngredientApplianceMapping implements Serializable  {
 	@ManyToOne
 	@JoinColumn(name="key")
 	private SpecialAppliances specialAppliances;
+	
 	public IngredientApplianceMapping() {}
+	
 	public int getAppMappingId() {
 		return appMappingId;
 	}
@@ -48,4 +50,4 @@ public class IngredientApplianceMapping implements Serializable  {
 	}
 	
 	
-}
+*/}

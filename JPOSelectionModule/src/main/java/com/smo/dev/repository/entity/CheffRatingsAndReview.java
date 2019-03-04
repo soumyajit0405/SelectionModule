@@ -1,4 +1,4 @@
-package com.smo.dev.entity;
+package com.smo.dev.repository.entity;
 
 import java.io.Serializable;
 

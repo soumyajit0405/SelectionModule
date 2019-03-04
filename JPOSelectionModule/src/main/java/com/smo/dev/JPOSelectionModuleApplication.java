@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JPOSelectionModuleApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("server.servlet.context-path", "/smo");
+		//System.setProperty("server.servlet.context-path", "/smo");
 		SpringApplication.run(JPOSelectionModuleApplication.class, args);
 	}
 }

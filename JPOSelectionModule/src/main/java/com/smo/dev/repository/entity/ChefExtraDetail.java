@@ -1,4 +1,4 @@
-package com.smo.dev.entity;
+package com.smo.dev.repository.entity;
 
 import java.io.Serializable;
 
@@ -11,6 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Table(name = "chef_extra_detail")

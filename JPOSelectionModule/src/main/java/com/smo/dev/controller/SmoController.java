@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ import com.smo.dev.model.SmoBaseDto;
 import com.smo.dev.service.SmoService;
 
 @RestController
-
+@CrossOrigin()
 public class SmoController {
 	
 	@Autowired
@@ -31,7 +32,7 @@ public class SmoController {
 	@GetMapping(value="/health")
 	public ResponseEntity<String> getHealthCheck (){
 		
-		return new ResponseEntity<String>(new String("Yes I am good"),HttpStatus.OK);
+		return new ResponseEntity<String>(new String("Yes I AM SELECTION MODULE,UP AND RUNNING"),HttpStatus.OK);
 	}
 	
 	/*
@@ -44,7 +45,7 @@ public class SmoController {
 		if(cheffInfoDto!= null) {
 			return new ResponseEntity<CheffInfoDto>(cheffInfoDto,HttpStatus.FOUND);
 		}
-			return new ResponseEntity<CheffInfoDto>(cheffInfoDto,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<CheffInfoDto>(cheffInfoDto,HttpStatus.OK);
 	}
 	
 	/**
@@ -63,7 +64,7 @@ public class SmoController {
 		if(!smoDtoList.isEmpty()) {
 			return new ResponseEntity<List<CheffInfoDto>>(smoDtoList,HttpStatus.FOUND);
 		}
-			return new ResponseEntity<List<CheffInfoDto>>(smoDtoList,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<CheffInfoDto>>(smoDtoList,HttpStatus.OK);
 	}
 	
 	
@@ -73,7 +74,7 @@ public class SmoController {
 		if(!smoBaseDtoList.isEmpty()) {
 			return new ResponseEntity<Set<SmoBaseDto>>(smoBaseDtoList,HttpStatus.FOUND);
 		}
-			return new ResponseEntity<Set<SmoBaseDto>>(smoBaseDtoList,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Set<SmoBaseDto>>(smoBaseDtoList,HttpStatus.OK);
 	}
 	
 	//LocalDateTime bookingStartTime,@RequestParam LocalDateTime bookingEndTime) 

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.smo.dev.entity.ChefBookingDetail;
+import com.smo.dev.repository.entity.ChefBookingDetail;
 /**
  * 
  * @author Ehtu
