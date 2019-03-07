@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.smo.dev.component.DistanceCalculator;
 import com.smo.dev.component.EntityModelMapper;
-import com.smo.dev.model.CheffInfoDto;
+import com.smo.dev.model.ChefDetailDto;
 import com.smo.dev.model.Location;
 import com.smo.dev.model.SmoBaseDto;
 import com.smo.dev.repository.SmoBookingRepository;
@@ -49,12 +49,12 @@ public class SmoServiceImpl  implements SmoService{
 	 */
 	@Override
 	@Transactional
-	public CheffInfoDto getCheffProfile(int cheffId) {
-		CheffInfoDto cheffInfoDto = new CheffInfoDto();
+	public ChefDetailDto getCheffProfile(long cheffId) {
+		ChefDetailDto cheffInfoDto = new ChefDetailDto();
 		try {
 			ChefDetail chefDetail = smoRepository.getOne(cheffId);
 		if(chefDetail!=null) {
-			return modelMapper.map(chefDetail,CheffInfoDto.class);
+			return modelMapper.map(chefDetail,ChefDetailDto.class);
 		}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -88,17 +88,17 @@ public class SmoServiceImpl  implements SmoService{
 
 	/**To DO ***/
 	@Override
-	public List<CheffInfoDto> findAvailableChefService
+	public List<ChefDetailDto> findAvailableChefService
 	(Location userLocation,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime) {
 		
-		List<CheffInfoDto> chefInfoResultList = new ArrayList<>();
+		List<ChefDetailDto> chefInfoResultList = new ArrayList<>();
 		try {
 			List<ChefDetail>	cheffDetailList = smoRepository.getAllChefByBookingTime(bookingStartTime,bookingEndTime);	
-		List<CheffInfoDto> chefInfoList = entityModelMapper.mapEntityToCheffInfoDto(cheffDetailList);
+		List<ChefDetailDto> chefInfoList = entityModelMapper.mapEntityToCheffInfoDto(cheffDetailList);
 		
 		
 		
-		for(CheffInfoDto CheffInfoDto : chefInfoList) {
+		for(ChefDetailDto CheffInfoDto : chefInfoList) {
 			Location chefLocation = CheffInfoDto.getLocation();
 			double distance = DistanceCalculator.distanceFinder (userLocation,chefLocation,"Y");
 			if(distance <= 4) {

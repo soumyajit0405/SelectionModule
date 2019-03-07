@@ -25,7 +25,7 @@ import javax.validation.constraints.NotEmpty;
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "booking_id",nullable = false)
-		private long booking_id;
+		private Long booking_id;
 		
 		@ManyToOne
 		@JoinColumn(name = "chef_id", referencedColumnName = "chef_id")
@@ -56,10 +56,10 @@ import javax.validation.constraints.NotEmpty;
 		}
 		
 		
-		public long getBooking_id() {
+		public Long getBooking_id() {
 			return booking_id;
 		}
-		public void setBooking_id(long booking_id) {
+		public void setBooking_id(Long booking_id) {
 			this.booking_id = booking_id;
 		}
 		public String getUsre_id() {

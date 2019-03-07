@@ -20,7 +20,7 @@ public class ChefExtraDetail  implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "chef_id",nullable = false)
-	private long chefId;
+	private Long chefId;
 	
 	@Column(name = "verification_status")
 	private String verificationStatus;
@@ -74,11 +74,11 @@ public class ChefExtraDetail  implements Serializable{
 
 	public ChefExtraDetail() {}
 
-	public long getChefId() {
+	public Long getChefId() {
 		return chefId;
 	}
 
-	public void setChefId(long chefId) {
+	public void setChefId(Long chefId) {
 		this.chefId = chefId;
 	}
 

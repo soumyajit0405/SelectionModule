@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import com.smo.dev.model.CheffInfoDto;
+import com.smo.dev.model.ChefDetailDto;
 import com.smo.dev.model.Location;
 import com.smo.dev.model.RatingAndReview;
 import com.smo.dev.model.SmoBaseDto;
@@ -44,11 +44,11 @@ public class EntityModelMapper {
 		}
 		return smoBaseDtoList;
 	}
-	public List<CheffInfoDto> mapEntityToCheffInfoDto(List<ChefDetail> cheffDetailList ) throws Exception{
-		List<CheffInfoDto> cheffInfoList = new ArrayList <>();
+	public List<ChefDetailDto> mapEntityToCheffInfoDto(List<ChefDetail> cheffDetailList ) throws Exception{
+		List<ChefDetailDto> cheffInfoList = new ArrayList <>();
 		if(!cheffDetailList.isEmpty() && cheffDetailList!=null) {
 		for(ChefDetail chefDetail : cheffDetailList) {
-			cheffInfoList.add(modelMapper.map(chefDetail, CheffInfoDto.class));
+			cheffInfoList.add(modelMapper.map(chefDetail, ChefDetailDto.class));
 		}
 		}
 		return cheffInfoList;

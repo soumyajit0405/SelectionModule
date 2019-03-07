@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smo.dev.model.CheffInfoDto;
+import com.smo.dev.model.ChefDetailDto;
 import com.smo.dev.model.Location;
 import com.smo.dev.model.SmoBaseDto;
 import com.smo.dev.service.SmoService;
@@ -40,12 +40,12 @@ public class SmoController {
 	 * @response : chef profile  
 	 */
 	@GetMapping(value="/profile/{chefId}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CheffInfoDto> getCheffProfile(@PathVariable int chefId) {
-		CheffInfoDto cheffInfoDto = smoService.getCheffProfile(chefId);
+	public ResponseEntity<ChefDetailDto> getCheffProfile(@PathVariable long chefId) {
+		ChefDetailDto cheffInfoDto = smoService.getCheffProfile(chefId);
 		if(cheffInfoDto!= null) {
-			return new ResponseEntity<CheffInfoDto>(cheffInfoDto,HttpStatus.FOUND);
+			return new ResponseEntity<ChefDetailDto>(cheffInfoDto,HttpStatus.FOUND);
 		}
-			return new ResponseEntity<CheffInfoDto>(cheffInfoDto,HttpStatus.OK);
+			return new ResponseEntity<ChefDetailDto>(cheffInfoDto,HttpStatus.OK);
 	}
 	
 	/**
@@ -55,16 +55,16 @@ public class SmoController {
 	 *         availablity of the chef
 	 */
 	@PostMapping(value="/allProfile",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<CheffInfoDto>> getAllAvailableCheffList(SmoBaseDto smoBaseDto) {
-		Location location = smoBaseDto.getLocation();
+	public ResponseEntity<List<ChefDetailDto>> getAllAvailableCheffList(ChefDetailDto ChefDetailDto) {
+		Location location = ChefDetailDto.getLocation();
 		//calling services
-		List<CheffInfoDto> smoDtoList = smoService.findAvailableChefService(location,
-				smoBaseDto.getBookingStartTime(),smoBaseDto.getBookingEndTime());
+		List<ChefDetailDto> smoDtoList = smoService.findAvailableChefService(location,
+				ChefDetailDto.getBookingStartTime(),ChefDetailDto.getBookingEndTime());
 		
 		if(!smoDtoList.isEmpty()) {
-			return new ResponseEntity<List<CheffInfoDto>>(smoDtoList,HttpStatus.FOUND);
+			return new ResponseEntity<List<ChefDetailDto>>(smoDtoList,HttpStatus.FOUND);
 		}
-			return new ResponseEntity<List<CheffInfoDto>>(smoDtoList,HttpStatus.OK);
+			return new ResponseEntity<List<ChefDetailDto>>(smoDtoList,HttpStatus.OK);
 	}
 	
 	

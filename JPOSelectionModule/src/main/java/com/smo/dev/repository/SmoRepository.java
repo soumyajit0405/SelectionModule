@@ -18,7 +18,7 @@ import com.smo.dev.repository.entity.ChefExtraDetail;
  *
  */
 @Repository
-public interface SmoRepository  extends JpaRepository<ChefDetail, Integer>{
+public interface SmoRepository  extends JpaRepository<ChefDetail, Long>{
 	
 	//List<CheffDetail> getAllCheffByCusineType(String cusine);
 	/*public final static String FIND_BY_BOOKING_TIME = "SELECT FROM ChefDetail " +

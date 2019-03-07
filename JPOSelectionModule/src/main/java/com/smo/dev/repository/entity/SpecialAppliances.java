@@ -21,7 +21,7 @@ public class SpecialAppliances implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "key",nullable = false)
-	private long key;
+	private int key;
 
 	@NotEmpty
 	@Column(name = "appliance_name")

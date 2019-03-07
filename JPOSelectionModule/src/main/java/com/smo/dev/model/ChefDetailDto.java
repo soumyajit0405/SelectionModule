@@ -1,10 +1,11 @@
 package com.smo.dev.model;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class CheffInfoDto {
+public class ChefDetailDto {
 	
 	private long chefId;
 	private String cheffFullName;
@@ -19,9 +20,11 @@ public class CheffInfoDto {
 	private int averageRating;
 	private Double latitude;
 	private Double longitude;
+	private LocalDateTime bookingStartTime;
+	private LocalDateTime bookingEndTime;
 	//private List<RatingAndReview> ratingAndReviewList;
 	private Map<String,String> cusineMap;
-	public CheffInfoDto () {}
+	public ChefDetailDto () {}
 	
 	
 	public Map<String, String> getCusineMap() {
@@ -113,6 +116,26 @@ public class CheffInfoDto {
 	}
 	public void setAverageRating(int averageRating) {
 		this.averageRating = averageRating;
+	}
+
+
+	public LocalDateTime getBookingStartTime() {
+		return bookingStartTime;
+	}
+
+
+	public void setBookingStartTime(LocalDateTime bookingStartTime) {
+		this.bookingStartTime = bookingStartTime;
+	}
+
+
+	public LocalDateTime getBookingEndTime() {
+		return bookingEndTime;
+	}
+
+
+	public void setBookingEndTime(LocalDateTime bookingEndTime) {
+		this.bookingEndTime = bookingEndTime;
 	}
 	
 	
