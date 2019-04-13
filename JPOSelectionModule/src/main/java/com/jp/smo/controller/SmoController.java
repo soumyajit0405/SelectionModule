@@ -59,18 +59,18 @@ public class SmoController {
 	 * @return This service serves the search result based on the location and 
 	 *         availablity of the chef
 	 */
-	/*@PostMapping(value="/allProfile",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ChefDetailDTO>> getAllAvailableCheffList(ChefDetailDTO chefDetailDto) {
+	@PostMapping(value="/allProfile",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ChefDetailDTO>> getAllAvailableCheffList(@RequestBody ChefDetailDTO chefDetailDto) {
 		Location location = chefDetailDto.getLocation();
 		//calling services
-		List<ChefDetailDTO> smoDtoList = smoService.findAvailableChefService(location,
+		List<ChefDetailDTO> chefDetailDTOList = smoService.findAvailableChefService(chefDetailDto.getChefLocation(),
 				chefDetailDto.getBookingStartTime(),chefDetailDto.getBookingEndTime());
 		
-		if(!smoDtoList.isEmpty()) {
-			return new ResponseEntity<List<ChefDetailDTO>>(smoDtoList,HttpStatus.FOUND);
+		if(!chefDetailDTOList.isEmpty()) {
+			return new ResponseEntity<List<ChefDetailDTO>>(chefDetailDTOList,HttpStatus.FOUND);
 		}
-			return new ResponseEntity<List<ChefDetailDTO>>(smoDtoList,HttpStatus.OK);
-	}*/
+			return new ResponseEntity<List<ChefDetailDTO>>(chefDetailDTOList,HttpStatus.OK);
+	}
 	
 	
 	/*@GetMapping(value="/cheffByCsn")

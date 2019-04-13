@@ -32,7 +32,6 @@ public class ChefDetailDTO {
 	private LocalDateTime bookingEndTime;
 	private PGpoint chefLocation;
 	//private List<RatingAndReview> ratingAndReviewList;
-	private Map<String,String> cusineMap;
 	List<DishDetailDTO> dishDetailDTOList;
 	
 	public ChefDetailDTO () {}

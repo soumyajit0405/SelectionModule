@@ -2,6 +2,7 @@ package com.jp.smo.repository.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -69,9 +70,21 @@ public class ChefDetail implements Serializable {
 	private PGpoint chefLocation;
 	
 	
+	//List<ChefBookingDetail> bookingDetail;
+	
 	//private List<String> bestPreparations;
 	
 	@OneToMany(mappedBy="chefDetail", fetch = FetchType.LAZY)
 	private List<ChefDishMapping> chefDishMappings = new ArrayList<>();
+
+
+	@Override
+	public String toString() {
+		return "ChefDetail [chefId=" + chefId + ", image=" + Arrays.toString(image) + ", cheffFullName=" + cheffFullName
+				+ ", chefType=" + chefType + ", chefCategory=" + chefCategory + ", qualification=" + qualification
+				+ ", specialization=" + specialization + ", comments=" + comments + ", chefLocation=" + chefLocation
+				+ "]";
+	}
+	
 	
 }

@@ -1,24 +1,33 @@
 package com.jp.smo.component;
 
+import org.postgresql.geometric.PGpoint;
 import org.springframework.stereotype.Component;
-
 import com.jp.smo.dto.Location;
+
 /**
  * 
  * @author Ehtu
  *  This is a utility class 
  */
+
 @Component
 public class DistanceCalculator {
 
-	public static double distanceFinder(Location requestLocation, Location chefLocation, String unit) {
-		double requestLatitude = requestLocation.getLatitude();
-		double requestLongitude = requestLocation.getLongitude();
-		double chefLatitude = chefLocation.getLatitude();
-		double chefLongitude = chefLocation.getLongitude();
+	/**
+	 * 
+	 * @param requestLocation
+	 * @param chefLocation
+	 * @param unit distnace calculation in kilometer,miles etc
+	 * @return
+	 */
+	public boolean distanceFinder(PGpoint currentLocation, PGpoint chefLocation, String unit) {
+		double requestLatitude = currentLocation.x;
+		double requestLongitude = currentLocation.y;
+		double chefLatitude = chefLocation.y;
+		double chefLongitude = chefLocation.y;
 		if ((requestLatitude == chefLatitude) 
 				&& (requestLongitude == chefLongitude)) {
-			return 0;
+			return true;
 		}
 		else {
 			double theta = chefLongitude - requestLongitude;
@@ -32,7 +41,11 @@ public class DistanceCalculator {
 			} else if (unit == "N") {
 				dist = dist * 0.8684;
 			}
-			return (dist);
+			
+			if(dist >= 4) {
+				return false;
+			}
+			return true;
 		}
 	}
 }

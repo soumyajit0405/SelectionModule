@@ -33,7 +33,7 @@ public class ChefDishMapping implements Serializable {
 	@Column(name = "dish_mapping_id",nullable = false)
 	private Long dishMappingId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name = "dish_id",nullable = false,insertable = false, updatable = false)
 	private DishDetail dishDetail;
 
@@ -43,5 +43,11 @@ public class ChefDishMapping implements Serializable {
 	
 	@Column(name = "preparation_score")
 	private Integer preparationScore;
+
+	@Override
+	public String toString() {
+		return "ChefDishMapping [dishMappingId=" + dishMappingId + ", preparationScore=" + preparationScore + "]";
+	}
+	
 
 }

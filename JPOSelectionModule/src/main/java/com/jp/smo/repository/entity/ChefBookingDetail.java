@@ -14,7 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.springframework.data.geo.Point;
+
+import com.jp.smo.component.PGPointType;
 
 import lombok.Data;
 	/**
@@ -23,22 +27,30 @@ import lombok.Data;
 	 *
 	 */
 @Data
-	@Entity
-	@Table(name = "booking_details")
-	public class ChefBookingDetail implements Serializable{
+@Entity
+@Table(name = "booking_details")
+@TypeDef(name = "type", typeClass = PGPointType.class)
+public class ChefBookingDetail implements Serializable{
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "booking_id",nullable = false)
 		private Long booking_id;
 		
-		@ManyToOne
+		/*@ManyToOne
 		@JoinColumn(name = "chef_id", referencedColumnName = "chef_id")
 		private ChefDetail chefDetail;
+		*/
+		@NotEmpty
+		@Column(name = "chef_Id")
+		private Long chefId;
 		
 		@NotEmpty
 		@Column(name = "user_id")
 		private String user_id;
+		
+		@Column(name = "booking_location")
+		@Type(type = "type")
 		private Point pgPoint;
 		
 		@NotEmpty

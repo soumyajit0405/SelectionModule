@@ -2,7 +2,6 @@ package com.jp.smo.component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Component;
 import com.jp.smo.dto.ChefDetailDTO;
 import com.jp.smo.dto.DishDetailDTO;
 import com.jp.smo.dto.Location;
-import com.jp.smo.dto.RatingAndReview;
 import com.jp.smo.dto.SmoBaseDto;
-import com.jp.smo.repository.entity.AllCuisine;
 import com.jp.smo.repository.entity.ChefDetail;
 import com.jp.smo.repository.entity.ChefDishMapping;
 import com.jp.smo.repository.entity.DishDetail;
@@ -47,6 +44,7 @@ public class EntityModelMapper {
 		}
 		return smoBaseDtoList;
 	}
+	
 	public List<ChefDetailDTO> mapEntityToCheffInfoDto(List<ChefDetail> cheffDetailList ) throws Exception{
 		List<ChefDetailDTO> cheffInfoList = new ArrayList <>();
 		if(!cheffDetailList.isEmpty() && cheffDetailList!=null) {
@@ -86,4 +84,5 @@ public class EntityModelMapper {
 	public ModelMapper gerModelMapper() {
 		return new ModelMapper();
 	}
+
 }

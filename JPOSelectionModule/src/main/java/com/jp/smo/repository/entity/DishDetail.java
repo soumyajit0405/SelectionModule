@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,7 +25,6 @@ import lombok.NoArgsConstructor;
 @Entity        
 @Table(name = "all_dishes")
 @NoArgsConstructor
-@AllArgsConstructor
 public class DishDetail implements Serializable {
 	
 	/**
@@ -40,7 +37,7 @@ public class DishDetail implements Serializable {
 	@Column(name = "dish_id",updatable = false, unique=true,nullable = false)
 	private Long dishId;
 	
-	@NotEmpty
+	
 	@Column(name = "dish_name")
 	private String dishName;
 	
@@ -56,8 +53,7 @@ public class DishDetail implements Serializable {
 	@NotEmpty
 	@Column(name = "dish_type")
 	private String type;
-	//@manyToMany
-	//private ChefDetail chefDetail; 
+	 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="cuisine_id")
 	private AllCuisine allCuisine;
@@ -67,6 +63,12 @@ public class DishDetail implements Serializable {
 	
 	@OneToMany(mappedBy="allDishes")
 	private List<DishIngredientMaapping> dishIngredientMaapping = new ArrayList<>();
-	
+
+	@Override
+	public String toString() {
+		return "DishDetail [dishId=" + dishId + ", dishName=" + dishName + ", description=" + description
+				+ ", dishImage=" + dishImage + ", dishVideo=" + Arrays.toString(dishVideo) + ", type=" + type + "]";
+	}
+
 	
 	}
