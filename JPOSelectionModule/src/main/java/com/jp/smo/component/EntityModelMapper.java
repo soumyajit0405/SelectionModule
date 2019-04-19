@@ -26,24 +26,17 @@ public class EntityModelMapper {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	public SmoBaseDto mapEntityToDto(ChefDetail chefDetail) {
-		Location location = new Location();
-		SmoBaseDto smoBaseDto = modelMapper.map(chefDetail,SmoBaseDto.class);
-		smoBaseDto.setAadhaarNum(0);
-		smoBaseDto.setPanNum(null);
-		smoBaseDto.setLocation(location);
-		return smoBaseDto;
+	public ChefDetailDTO mapEntityToDto(ChefDetail chefDetail) {
+		return modelMapper.map(chefDetail, ChefDetailDTO.class);
+		
 	}
-	
-	public List<SmoBaseDto> mapEntityListToDtoList(List<ChefDetail> cheffDetailList){
-		List<SmoBaseDto> smoBaseDtoList = new ArrayList<>();
-		if(!cheffDetailList.isEmpty()) {
-			for(ChefDetail chefDetail : cheffDetailList) {
-				smoBaseDtoList.add(mapEntityToDto(chefDetail));
-			}
-		}
-		return smoBaseDtoList;
-	}
+	/*
+	 * public List<SmoBaseDto> mapEntityListToDtoList(List<ChefDetail>
+	 * cheffDetailList){ List<SmoBaseDto> smoBaseDtoList = new ArrayList<>();
+	 * if(!cheffDetailList.isEmpty()) { for(ChefDetail chefDetail : cheffDetailList)
+	 * { smoBaseDtoList.add(mapEntityToDto(chefDetail)); } } return smoBaseDtoList;
+	 * }
+	 */
 	
 	public List<ChefDetailDTO> mapEntityToCheffInfoDto(List<ChefDetail> cheffDetailList ) throws Exception{
 		List<ChefDetailDTO> cheffInfoList = new ArrayList <>();

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +18,14 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.postgresql.geometric.PGpoint;
 import org.springframework.data.geo.Point;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jp.smo.component.PGPointType;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 	/**
 	 * 
 	 * @author EMazhar
@@ -28,42 +33,57 @@ import lombok.Data;
 	 */
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "booking_details")
 @TypeDef(name = "type", typeClass = PGPointType.class)
 public class ChefBookingDetail implements Serializable{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "booking_id",nullable = false)
 		private Long booking_id;
 		
-		/*@ManyToOne
+		@ManyToOne
 		@JoinColumn(name = "chef_id", referencedColumnName = "chef_id")
 		private ChefDetail chefDetail;
-		*/
-		@NotEmpty
-		@Column(name = "chef_Id")
-		private Long chefId;
 		
-		@NotEmpty
+	/*
+	 * @NotEmpty
+	 * 
+	 * @Column(name = "chef_Id") private Long chefId;
+	 */
+		
 		@Column(name = "user_id")
-		private String user_id;
+		private Long user_id;
+		
 		
 		@Column(name = "booking_location")
 		@Type(type = "type")
-		private Point pgPoint;
+		private PGpoint pgPoint;
 		
-		@NotEmpty
-		@Column(name = "booking_start_time", nullable = false)
+		
+		@Column(name = "start_time", nullable = false)
 		private LocalDateTime startTime;
 		
-		@NotEmpty
-		@Column(name = "booking_end_time",nullable = false)
-		private LocalDateTime endTime;
 		
-	    
-		/*@ManyToOne(cascade= CascadeType.ALL)
-	    @JoinColumn(name = "chef_id")
-	    private ChefDetail chefDetail;*/
-	
+		@Column(name = "end_time",nullable = false)
+		private LocalDateTime endTime;
+
+	/*
+	 * public Point getPgPoint(double x,double y) { return new Point (x,y); }
+	 * 
+	 * public void setPgPoint(Point pgPoint) { this.pgPoint = pgPoint; }
+	 * 
+	 */
+	/*
+	 * @ManyToOne(cascade= CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "chef_id") private ChefDetail chefDetail;
+	 */
+		
 }

@@ -21,10 +21,10 @@ public class DistanceCalculator {
 	 * @return
 	 */
 	public boolean distanceFinder(PGpoint currentLocation, PGpoint chefLocation, String unit) {
-		double requestLatitude = currentLocation.x;
-		double requestLongitude = currentLocation.y;
+		double requestLatitude = currentLocation.y;
+		double requestLongitude = currentLocation.x;
 		double chefLatitude = chefLocation.y;
-		double chefLongitude = chefLocation.y;
+		double chefLongitude = chefLocation.x;
 		if ((requestLatitude == chefLatitude) 
 				&& (requestLongitude == chefLongitude)) {
 			return true;

@@ -65,18 +65,20 @@ public class ChefDetail implements Serializable {
 	/*@Column(name = "availability_flag")
 	private short isAvailable;
 	*/
+	
 	@Column(name = "chef_location")
 	@Type(type = "type")
 	private PGpoint chefLocation;
 	
-	
-	//List<ChefBookingDetail> bookingDetail;
+	@OneToMany(mappedBy="chefDetail", fetch = FetchType.EAGER)
+	List<ChefBookingDetail> bookingDetail /* = new ArrayList<>() */;
 	
 	//private List<String> bestPreparations;
 	
 	@OneToMany(mappedBy="chefDetail", fetch = FetchType.LAZY)
 	private List<ChefDishMapping> chefDishMappings = new ArrayList<>();
-
+	
+	
 
 	@Override
 	public String toString() {
@@ -85,6 +87,5 @@ public class ChefDetail implements Serializable {
 				+ ", specialization=" + specialization + ", comments=" + comments + ", chefLocation=" + chefLocation
 				+ "]";
 	}
-	
 	
 }

@@ -36,7 +36,7 @@ public interface SmoService {
 	 * @param bookingEndTime
 	 * @return
 	 */
-	List<ChefDetailDTO> findAvailableChefService(PGpoint currentLocation,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime);
+	Set<ChefDetailDTO> findAvailableChefService(PGpoint currentLocation,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime);
 	
 	
 	//List<SmoBaseDto> getAvailabeCheffByLocation(String Location,Boolean availabe);

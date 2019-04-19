@@ -1,5 +1,6 @@
 package com.jp.smo.component;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,11 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 import org.postgresql.geometric.PGpoint;
 
-public class PGPointType implements UserType {
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
+public class PGPointType  extends JsonSerializer implements UserType {
 
 	@Override
 	public int[] sqlTypes() {
@@ -88,6 +93,11 @@ public class PGPointType implements UserType {
 	public Object replace(Object original, Object target, Object owner) throws HibernateException {
 		// TODO Auto-generated method stub
 		return original;
+	}
+
+	@Override
+	public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+		
 	}
 
 }

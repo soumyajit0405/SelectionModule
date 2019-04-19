@@ -2,9 +2,12 @@ package com.jp.smo.service.serviceImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import javax.transaction.Transactional;
 
 import org.postgresql.geometric.PGpoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import com.jp.smo.dto.SmoBaseDto;
 import com.jp.smo.exception.ChefNotFoundException;
 import com.jp.smo.repository.ChefDishMappingRepository;
 import com.jp.smo.repository.SmoRepository;
+import com.jp.smo.repository.entity.ChefBookingDetail;
 import com.jp.smo.repository.entity.ChefDetail;
 import com.jp.smo.repository.entity.ChefDishMapping;
 import com.jp.smo.repository.entity.DishDetail;
@@ -67,29 +71,40 @@ public class SmoServiceImpl implements SmoService {
 
 
 	@Override
-	public List<ChefDetailDTO> findAvailableChefService(PGpoint currentLocation, LocalDateTime bookingStartTime,
-			LocalDateTime bookingEndTime) {
+	@Transactional
+	public Set<ChefDetailDTO> findAvailableChefService(PGpoint currentLocation, LocalDateTime bookingStartTime,
+			LocalDateTime bookingEndTime) {	
 		
-		List<ChefDetailDTO> responseDtoList = new ArrayList<>();
-		List<ChefDetail> chefDetailList ;
-		List<ChefDetail> chefDetailResponseList = new ArrayList<>();
-		chefDetailList = smoRepository.findAvailableChefBasedOnBookingTime(bookingStartTime, bookingEndTime);
+		Set<ChefDetailDTO> responseDtoList = new HashSet<>();
+		Set<ChefDetail> chefAvailableSet ;
+		chefAvailableSet = smoRepository.findAvailableChefBasedOnBookingTime(bookingStartTime, bookingEndTime);
+		System.out.println("Size of chefAvailable List :"+chefAvailableSet.size());
+		/**
+		 * if there is no booking
+		 */
 		
-		if(chefDetailList.isEmpty()) {
-			chefDetailList = smoRepository.findAll();
-		}
-
-		for(ChefDetail chefDetail : chefDetailList) {
+		  if(chefAvailableSet.isEmpty()) { 
 			
-			if(distanceCalculator.distanceFinder(currentLocation,chefDetail.getChefLocation(), "K")) {
-				chefDetailResponseList.add(chefDetail);
+			  //chefDetailList = smoRepository.findAll();
+		  }
+		 
+		  
+		for(ChefDetail chefDetail : chefAvailableSet) {
+			PGpoint chefCurrentLocation ;
+			PGpoint chefBaseLocation = chefDetail.getChefLocation();
+			if( chefDetail.getBookingDetail().size()>=1) {
+				for(ChefBookingDetail bkd: chefDetail.getBookingDetail()) {
+					if(bookingStartTime.compareTo(bkd.getEndTime().plusMinutes(30))>0) {//chef booking end time +30 min >= new Booking start time
+					chefBaseLocation = bkd.getPgPoint();
+					}
+				if(distanceCalculator.distanceFinder(currentLocation,chefBaseLocation, "K")) {
+				responseDtoList.add(entityModelMapper.mapEntityToDto(chefDetail));
+				}
 			}
 		}
 		
-		System.out.println("Number of records : "+chefDetailResponseList.size());
-		for(ChefDetail chefDetail : chefDetailResponseList) {
-			System.out.println("name of chef : " +chefDetail.getCheffFullName());
-		}
+			
+	}
 		return responseDtoList;
 	}
 
