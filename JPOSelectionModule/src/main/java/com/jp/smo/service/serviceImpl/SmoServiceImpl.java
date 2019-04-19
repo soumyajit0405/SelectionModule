@@ -63,7 +63,7 @@ public class SmoServiceImpl implements SmoService {
 			System.out.println("Dish ID :: "+chefDetail.getChefDishMappings().get(0).getDishDetail().getDishId());*/
 			responseDto = entityModelMapper.prepareChefProfile(chefDetail);
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 
 		return responseDto;
@@ -87,20 +87,27 @@ public class SmoServiceImpl implements SmoService {
 			
 			  //chefDetailList = smoRepository.findAll();
 		  }
-		 
-		  
+		   
 		for(ChefDetail chefDetail : chefAvailableSet) {
+			System.out.println("test : "+chefDetail.getChefId());
 			PGpoint chefCurrentLocation ;
 			PGpoint chefBaseLocation = chefDetail.getChefLocation();
 			if( chefDetail.getBookingDetail().size()>=1) {
+				System.out.println("test1 : "+chefDetail.getChefId());
 				for(ChefBookingDetail bkd: chefDetail.getBookingDetail()) {
-					if(bookingStartTime.compareTo(bkd.getEndTime().plusMinutes(30))>0) {//chef booking end time +30 min >= new Booking start time
-					chefBaseLocation = bkd.getPgPoint();
+					if((bookingStartTime.compareTo(bkd.getEndTime().plusMinutes(30))<0)) {//chef booking end time +30 min >= new Booking start time
+						
+						chefBaseLocation = bkd.getPgPoint();
 					}
 				if(distanceCalculator.distanceFinder(currentLocation,chefBaseLocation, "K")) {
 				responseDtoList.add(entityModelMapper.mapEntityToDto(chefDetail));
 				}
 			}
+		}else if (chefDetail.getBookingDetail().size()==0) {
+			System.out.println("Test2 :"+chefDetail.getChefId());
+			if(distanceCalculator.distanceFinder(currentLocation,chefBaseLocation, "K")) {
+				responseDtoList.add(entityModelMapper.mapEntityToDto(chefDetail));
+				}
 		}
 		
 			

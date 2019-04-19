@@ -62,7 +62,7 @@ public class EntityModelMapper {
 			for(ChefDishMapping chefDishMapping : chefDishMappingList) {
 				DishDetail dishDetail= chefDishMapping.getDishDetail();
 				if(dishDetail!=null) {
-					System.out.println("DISH NAME: "+dishDetail.getDishName());
+					//System.out.println("DISH NAME: "+dishDetail.getDishName());
 					dishDetailDTOList.add(modelMapper.map(dishDetail, DishDetailDTO.class));
 				}
 				

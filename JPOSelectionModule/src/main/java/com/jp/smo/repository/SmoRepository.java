@@ -33,14 +33,16 @@ public interface SmoRepository extends JpaRepository<ChefDetail, Long> {
 	 * @Query("select cd from ChefDetail cd left join cd.chefBookingDetail cbkd where cbkd.startTime NOT BETWEEN :bookingStartTime AND :bookingEndTime"
 	 * ) List<ChefDetail> getAllChefByBookingTime(LocalDateTime bookingStartTime,
 	 * LocalDateTime bookingEndTime);
-	 */
-	@Query("Select chefDetail from ChefDetail chefDetail where chefDetail.chefId=?1")
+	 */	@Query("Select chefDetail from ChefDetail chefDetail where chefDetail.chefId=?1")
 	ChefDetail findByChefId(long chefId);
 
 	
-	@Query("SELECT cd FROM ChefDetail cd LEFT OUTER JOIN ChefBookingDetail bd ON cd.chefId = bd.chefDetail.chefId"  + " where (bd.startTime =null AND bd.endTime = null) OR (bd.startTime > ?2 OR bd.endTime <?1)") 
+	@Query ("SELECT cd FROM ChefDetail cd LEFT OUTER JOIN ChefBookingDetail bd ON cd.chefId = bd.chefDetail.chefId"
+			+" where cd.chefId NOT IN (SELECT cd1.chefId FROM  ChefDetail cd1 LEFT OUTER JOIN ChefBookingDetail bd1"
+			+" ON cd1.chefId = bd1.chefDetail.chefId" 
+			+" WHERE  ( '2019-04-20T12:00:00.00' BETWEEN bd1.startTime AND bd1.endTime )" 
+			+" OR ( '2019-04-20T14:30:00.00' BETWEEN bd1.startTime AND bd1.endTime ))")
 	Set<ChefDetail> findAvailableChefBasedOnBookingTime(@Param("bookingStartTime") LocalDateTime bookingStartTime,
 			@Param("bookingEndTime") LocalDateTime bookingEndTime);
-	//@Query("Select cd from ChefDetail cd where cd.chefId NOT IN (Select bd.chefId from ChefBookingDetail bd)")
-	//List<ChefDetail> findAllChefNotBooked(); 
+	
 }
