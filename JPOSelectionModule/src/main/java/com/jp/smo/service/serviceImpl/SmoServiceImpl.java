@@ -2,8 +2,10 @@ package com.jp.smo.service.serviceImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,12 +17,14 @@ import org.springframework.stereotype.Service;
 
 import com.jp.smo.component.DistanceCalculator;
 import com.jp.smo.component.EntityModelMapper;
+import com.jp.smo.dto.CategoryTariffDto;
 import com.jp.smo.dto.ChefDetailDTO;
 import com.jp.smo.dto.Location;
 import com.jp.smo.dto.SmoBaseDto;
 import com.jp.smo.exception.ChefNotFoundException;
 import com.jp.smo.repository.ChefDishMappingRepository;
 import com.jp.smo.repository.SmoRepository;
+import com.jp.smo.repository.entity.CategoryTariff;
 import com.jp.smo.repository.entity.ChefBookingDetail;
 import com.jp.smo.repository.entity.ChefDetail;
 import com.jp.smo.repository.entity.ChefDishMapping;
@@ -34,6 +38,8 @@ import com.jp.smo.service.SmoService;
 @Service
 public class SmoServiceImpl implements SmoService {
 
+	private Map<Integer,Double> cateogryPriceMap = new HashMap<Integer,Double>();
+	private Map<Integer,String> ChefTypeMap = new HashMap <>();
 	@Autowired
 	private SmoRepository smoRepository;
 	@Autowired
@@ -42,11 +48,14 @@ public class SmoServiceImpl implements SmoService {
 	private ChefDishMappingRepository chefDishMappingRepository;
 	@Autowired
 	private DistanceCalculator distanceCalculator;
+	@Autowired
+	private SmoPicklistServiceImpl smoPicklistServiceImpl;
 	
 	
 	@Override
 	public ChefDetailDTO cheffProfileProviderService(long cheffId) throws ChefNotFoundException {
 		ChefDetailDTO responseDto = new ChefDetailDTO();
+		
 		List<Long> mappinfIdLst = new ArrayList<>();
 		try {
 			ChefDetail chefDetail = smoRepository.findByChefId(cheffId);
@@ -74,19 +83,12 @@ public class SmoServiceImpl implements SmoService {
 	@Transactional
 	public Set<ChefDetailDTO> findAvailableChefService(PGpoint currentLocation, LocalDateTime bookingStartTime,
 			LocalDateTime bookingEndTime) {	
-		
-		Set<ChefDetailDTO> responseDtoList = new HashSet<>();
+		Map<Integer,CategoryTariffDto> categoryTariffMap = smoPicklistServiceImpl.getCategoryTariffMap();
+		Set<ChefDetailDTO> responseDtoSet = new HashSet<>();
 		Set<ChefDetail> chefAvailableSet ;
+		ChefDetailDTO responseDto = new ChefDetailDTO();
 		chefAvailableSet = smoRepository.findAvailableChefBasedOnBookingTime(bookingStartTime, bookingEndTime);
 		System.out.println("Size of chefAvailable List :"+chefAvailableSet.size());
-		/**
-		 * if there is no booking
-		 */
-		
-		  if(chefAvailableSet.isEmpty()) { 
-			
-			  //chefDetailList = smoRepository.findAll();
-		  }
 		   
 		for(ChefDetail chefDetail : chefAvailableSet) {
 			System.out.println("test : "+chefDetail.getChefId());
@@ -99,21 +101,23 @@ public class SmoServiceImpl implements SmoService {
 						
 						chefBaseLocation = bkd.getPgPoint();
 					}
+				
 				if(distanceCalculator.distanceFinder(currentLocation,chefBaseLocation, "K")) {
-				responseDtoList.add(entityModelMapper.mapEntityToDto(chefDetail));
+					responseDto =entityModelMapper.mapEntityToDto(chefDetail);
+					responseDto.setCategoryTariffDto(categoryTariffMap.get(chefDetail.getChefCategory()));
+					responseDtoSet.add(responseDto);
 				}
 			}
 		}else if (chefDetail.getBookingDetail().size()==0) {
 			System.out.println("Test2 :"+chefDetail.getChefId());
 			if(distanceCalculator.distanceFinder(currentLocation,chefBaseLocation, "K")) {
-				responseDtoList.add(entityModelMapper.mapEntityToDto(chefDetail));
+				responseDto =entityModelMapper.mapEntityToDto(chefDetail);
+				responseDto.setCategoryTariffDto(categoryTariffMap.get(chefDetail.getChefCategory()));
+				
+				responseDtoSet.add(responseDto);
 				}
 		}
-		
-			
 	}
-		return responseDtoList;
-	}
-
-	
+		return responseDtoSet;
+	} 
 }

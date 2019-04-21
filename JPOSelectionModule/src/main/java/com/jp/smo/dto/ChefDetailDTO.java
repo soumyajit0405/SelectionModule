@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.postgresql.geometric.PGpoint;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 /**
  * 
  * @author Ehtu
@@ -15,17 +17,19 @@ import lombok.Data;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChefDetailDTO {
 	
 	private long chefId;
-	private String cheffFullName;
+	private String chefFullName;
 	//private long phoneNumber;
 	private String description;
 	private List<CusineDTO> cusineList;
 	private Location location;
 	private List<String> bestPreparations;
 	private byte[] imageFile;
-	private int bookingCost;
+	private double bookingCost;
 	private String chefCategory;
 	private int averageRating;
 	private LocalDateTime bookingStartTime;
@@ -33,8 +37,7 @@ public class ChefDetailDTO {
 	private PGpoint chefLocation;
 	//private List<RatingAndReview> ratingAndReviewList;
 	List<DishDetailDTO> dishDetailDTOList;
-	
-	public ChefDetailDTO () {}
+	private CategoryTariffDto categoryTariffDto;
 	
 }
 
